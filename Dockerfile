@@ -16,8 +16,6 @@ RUN go mod download
 RUN go build -trimpath -ldflags "-s -w" -o dca
 RUN strip /dca/cmd/dca/dca
 
-FROM alpine
-
-RUN apk add --no-cache gcompat
+FROM scratch
 
 COPY --from=build /dca/cmd/dca/dca /usr/bin/
