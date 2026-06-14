@@ -7,7 +7,8 @@ RUN --mount=type=cache,target=/var/cache/apk \
 RUN git clone --branch 1.1.2 --depth 1 https://github.com/xiph/opus.git /opus
 WORKDIR /opus
 
-RUN ln -s ccache /usr/local/bin/gcc && ln -s ccache /usr/local/bin/g++ && ln -s ccache /usr/local/bin/cc && ln -s ccache /usr/local/bin/c++
+ENV CC=/usr/local/bin/gcc CXX=/usr/local/bin/g++
+RUN ln -s /usr/bin/ccache /usr/local/bin/gcc && ln -s /usr/bin/ccache /usr/local/bin/g++ && ln -s /usr/bin/ccache /usr/local/bin/cc && ln -s /usr/bin/ccache /usr/local/bin/c++
 ENV CCACHE_DIR=/ccache
 
 RUN --mount=type=cache,target=/ccache \
